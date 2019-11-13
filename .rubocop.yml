@@ -1,0 +1,12 @@
+AllCops:
+  TargetRubyVersion: 2.5
+  Exclude:
+    - '**/vendor/**/*'
+
+Naming/FileName:
+  Exclude:
+    - 'lib/ar-multidb.rb'
+Metrics:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
