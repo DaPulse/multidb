@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Multidb
   class Candidate
     def initialize(name, target)
@@ -11,7 +13,6 @@ module Multidb
       else
         raise ArgumentError, 'Connection handler not passed to target'
       end
-
     end
 
     def connection(&block)
