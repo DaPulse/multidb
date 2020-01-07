@@ -8,6 +8,7 @@ module Multidb
     end
 
     def connection
+      return super if Multidb.model_excluded?(self)
       Multidb.balancer.current_connection
     rescue Multidb::NotInitializedError
       super
