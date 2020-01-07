@@ -8,6 +8,7 @@ module Multidb
     default_adapter, configuration_hash = activerecord_config, activerecord_config.delete(:multidb)
 
     @balancer = Balancer.new(Configuration.new(default_adapter, configuration_hash || {}))
+    @excluded_models = Set.new(configuration_hash[:excluded]) if configuration_hash
   end
 
   def self.balancer
@@ -16,6 +17,10 @@ module Multidb
     else
       raise NotInitializedError, "Balancer not initialized. You need to run Multidb.init first"
     end
+  end
+
+  def self.model_excluded?(klass)
+    @excluded_models.include? klass.to_s
   end
 
   def self.reset!
