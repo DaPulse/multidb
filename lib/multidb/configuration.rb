@@ -20,7 +20,7 @@ module Multidb
   end
 
   def self.model_excluded?(klass)
-    @excluded_models.include? klass.to_s
+    (@excluded_models || []).include? klass.to_s
   end
 
   def self.reset!
