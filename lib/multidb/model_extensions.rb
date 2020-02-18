@@ -4,7 +4,9 @@ module Multidb
   module Connection
     def establish_connection(spec = nil)
       super(spec)
-      Multidb.init(connection_pool.spec.config)
+      unless [CommunicationModel, CommunicationSplitModel].include? self
+        Multidb.init(connection_pool.spec.config)
+      end
     end
 
     def connection
