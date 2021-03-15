@@ -10,9 +10,12 @@ module Multidb
     default_adapter = activerecord_config
     configuration_hash = activerecord_config.delete(:multidb)
 
-    @balancer = Balancer.new(Configuration.new(default_adapter, configuration_hash || {}))
     @excluded_models   = Set.new(configuration_hash[:excluded]) if configuration_hash
     @excluded_models ||= Set.new([])
+
+    return if configuration_hash.blank?
+
+    @balancer = Balancer.new(Configuration.new(default_adapter, configuration_hash || {}))
   end
 
   def self.balancer
